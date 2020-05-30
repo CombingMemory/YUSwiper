@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "YUSwiper"
-  spec.version      = "0.1.3"
+  spec.version      = "1.0.0"
   spec.summary      = "一个可以设置整页滑动宽度的轮播图"
 
   # This description is used to generate tags and improve search results.
@@ -33,7 +33,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author       = { "lvyi" => "956167738@qq.com" }
   spec.source       = { :git => "https://github.com/CombingMemory/YUSwiper.git", :tag => "#{spec.version}" }
-  spec.source_files = "Classes/**/*.{h,m}"
+  spec.source_files = "Classes/**/*"
 
 
   spec.platform = :ios, "6.0"
