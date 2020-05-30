@@ -1,0 +1,355 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD1D5718248233F500CFA76F /* 05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5713248233F500CFA76F /* 05.jpg */; };
+		CD1D5719248233F500CFA76F /* 03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5714248233F500CFA76F /* 03.jpg */; };
+		CD1D571A248233F500CFA76F /* 02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5715248233F500CFA76F /* 02.jpg */; };
+		CD1D571B248233F500CFA76F /* 01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5716248233F500CFA76F /* 01.jpg */; };
+		CD1D571C248233F500CFA76F /* 04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5717248233F500CFA76F /* 04.jpg */; };
+		CD1D571F248251E400CFA76F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D571E248251E400CFA76F /* AppDelegate.m */; };
+		CD1D572524826BC500CFA76F /* YUSwiper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D572224826BC500CFA76F /* YUSwiper.m */; };
+		CD1D572624826BC500CFA76F /* YUSwiperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D572424826BC500CFA76F /* YUSwiperCell.m */; };
+		CD7DE35E24764798007CDDA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DE35D24764798007CDDA9 /* ViewController.m */; };
+		CD7DE3632476479C007CDDA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7DE3622476479C007CDDA9 /* Assets.xcassets */; };
+		CD7DE3692476479C007CDDA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DE3682476479C007CDDA9 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CD1D5713248233F500CFA76F /* 05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 05.jpg; sourceTree = "<group>"; };
+		CD1D5714248233F500CFA76F /* 03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 03.jpg; sourceTree = "<group>"; };
+		CD1D5715248233F500CFA76F /* 02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 02.jpg; sourceTree = "<group>"; };
+		CD1D5716248233F500CFA76F /* 01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 01.jpg; sourceTree = "<group>"; };
+		CD1D5717248233F500CFA76F /* 04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 04.jpg; sourceTree = "<group>"; };
+		CD1D571D248251E400CFA76F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CD1D571E248251E400CFA76F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CD1D572124826BC500CFA76F /* YUSwiperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUSwiperCell.h; sourceTree = "<group>"; };
+		CD1D572224826BC500CFA76F /* YUSwiper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUSwiper.m; sourceTree = "<group>"; };
+		CD1D572324826BC500CFA76F /* YUSwiper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUSwiper.h; sourceTree = "<group>"; };
+		CD1D572424826BC500CFA76F /* YUSwiperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUSwiperCell.m; sourceTree = "<group>"; };
+		CD7DE35324764798007CDDA9 /* YUSwiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YUSwiper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD7DE35C24764798007CDDA9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CD7DE35D24764798007CDDA9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CD7DE3622476479C007CDDA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD7DE3672476479C007CDDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD7DE3682476479C007CDDA9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD7DE35024764798007CDDA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD1D572024826BC500CFA76F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CD1D572324826BC500CFA76F /* YUSwiper.h */,
+				CD1D572224826BC500CFA76F /* YUSwiper.m */,
+				CD1D572124826BC500CFA76F /* YUSwiperCell.h */,
+				CD1D572424826BC500CFA76F /* YUSwiperCell.m */,
+			);
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
+		};
+		CD7DE34A24764798007CDDA9 = {
+			isa = PBXGroup;
+			children = (
+				CD7DE35524764798007CDDA9 /* YUSwiper */,
+				CD7DE35424764798007CDDA9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD7DE35424764798007CDDA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD7DE35324764798007CDDA9 /* YUSwiper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD7DE35524764798007CDDA9 /* YUSwiper */ = {
+			isa = PBXGroup;
+			children = (
+				CD1D572024826BC500CFA76F /* Classes */,
+				CD1D571D248251E400CFA76F /* AppDelegate.h */,
+				CD1D571E248251E400CFA76F /* AppDelegate.m */,
+				CD7DE35C24764798007CDDA9 /* ViewController.h */,
+				CD7DE35D24764798007CDDA9 /* ViewController.m */,
+				CD1D5716248233F500CFA76F /* 01.jpg */,
+				CD1D5715248233F500CFA76F /* 02.jpg */,
+				CD1D5714248233F500CFA76F /* 03.jpg */,
+				CD1D5717248233F500CFA76F /* 04.jpg */,
+				CD1D5713248233F500CFA76F /* 05.jpg */,
+				CD7DE3622476479C007CDDA9 /* Assets.xcassets */,
+				CD7DE3672476479C007CDDA9 /* Info.plist */,
+				CD7DE3682476479C007CDDA9 /* main.m */,
+			);
+			path = YUSwiper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD7DE35224764798007CDDA9 /* YUSwiper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD7DE36C2476479C007CDDA9 /* Build configuration list for PBXNativeTarget "YUSwiper" */;
+			buildPhases = (
+				CD7DE34F24764798007CDDA9 /* Sources */,
+				CD7DE35024764798007CDDA9 /* Frameworks */,
+				CD7DE35124764798007CDDA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YUSwiper;
+			productName = YUSwiper;
+			productReference = CD7DE35324764798007CDDA9 /* YUSwiper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD7DE34B24764798007CDDA9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = "捋忆";
+				TargetAttributes = {
+					CD7DE35224764798007CDDA9 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = CD7DE34E24764798007CDDA9 /* Build configuration list for PBXProject "YUSwiper" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CD7DE34A24764798007CDDA9;
+			productRefGroup = CD7DE35424764798007CDDA9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD7DE35224764798007CDDA9 /* YUSwiper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD7DE35124764798007CDDA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD1D5719248233F500CFA76F /* 03.jpg in Resources */,
+				CD1D571C248233F500CFA76F /* 04.jpg in Resources */,
+				CD1D571A248233F500CFA76F /* 02.jpg in Resources */,
+				CD7DE3632476479C007CDDA9 /* Assets.xcassets in Resources */,
+				CD1D5718248233F500CFA76F /* 05.jpg in Resources */,
+				CD1D571B248233F500CFA76F /* 01.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD7DE34F24764798007CDDA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD7DE35E24764798007CDDA9 /* ViewController.m in Sources */,
+				CD1D572524826BC500CFA76F /* YUSwiper.m in Sources */,
+				CD7DE3692476479C007CDDA9 /* main.m in Sources */,
+				CD1D571F248251E400CFA76F /* AppDelegate.m in Sources */,
+				CD1D572624826BC500CFA76F /* YUSwiperCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CD7DE36A2476479C007CDDA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CD7DE36B2476479C007CDDA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD7DE36D2476479C007CDDA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M3J46398ND;
+				INFOPLIST_FILE = YUSwiper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yu.YUSwiper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD7DE36E2476479C007CDDA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M3J46398ND;
+				INFOPLIST_FILE = YUSwiper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yu.YUSwiper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD7DE34E24764798007CDDA9 /* Build configuration list for PBXProject "YUSwiper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD7DE36A2476479C007CDDA9 /* Debug */,
+				CD7DE36B2476479C007CDDA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD7DE36C2476479C007CDDA9 /* Build configuration list for PBXNativeTarget "YUSwiper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD7DE36D2476479C007CDDA9 /* Debug */,
+				CD7DE36E2476479C007CDDA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD7DE34B24764798007CDDA9 /* Project object */;
+}
