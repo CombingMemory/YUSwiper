@@ -34,9 +34,6 @@
     self.swiper = [[YUSwiper alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 150) pageWidth:self.view.frame.size.width - 32];
     [self.view addSubview:self.swiper];
     
-    
-//    [self.swiper registerCellForClass:[YUSwiperCell class]];
-    
     self.swiper.delegate = self;
     self.swiper.autoplay = YES;
     
