@@ -35,21 +35,16 @@
     [self.view addSubview:self.swiper];
     
     self.swiper.delegate = self;
-    self.swiper.autoplay = YES;
+        self.swiper.autoplay = YES;
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [self.array addObject:[UIImage imageNamed:@"01.jpg"]];
-        [self.array addObject:[UIImage imageNamed:@"02.jpg"]];
-        [self.array addObject:[UIImage imageNamed:@"03.jpg"]];
-        [self.array addObject:[UIImage imageNamed:@"04.jpg"]];
-        [self.array addObject:[UIImage imageNamed:@"05.jpg"]];
-        
-        [self.swiper reloadData];
-    });
-    
-    
+    //    self.swiper.backgroundColor = [UIColor yellowColor];
+    [self.array addObject:[UIImage imageNamed:@"01.jpg"]];
+    [self.array addObject:[UIImage imageNamed:@"02.jpg"]];
+    [self.array addObject:[UIImage imageNamed:@"03.jpg"]];
+    [self.array addObject:[UIImage imageNamed:@"04.jpg"]];
+    [self.array addObject:[UIImage imageNamed:@"05.jpg"]];
+    [self.swiper reloadData];
 }
 
 - (NSInteger)numberOfCountInSwiper:(YUSwiper *)swiper{
@@ -61,7 +56,7 @@
 }
 
 - (void)currentIndexChange:(NSInteger)currentIndex{
-
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

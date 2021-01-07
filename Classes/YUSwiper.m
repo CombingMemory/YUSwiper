@@ -60,9 +60,9 @@
         [cell removeFromSuperview];
     }
     [self.cells removeAllObjects];
-    CGFloat width = self.scrollView.frame.size.width;
-    CGFloat height = self.scrollView.frame.size.height;
-    for (int i = 0; i<3; i++) {
+    CGFloat width = self.scrollView.bounds.size.width;
+    CGFloat height = self.scrollView.bounds.size.height;
+    for (int i = 0; i < 3; i++) {
         YUSwiperCell *cell = [[cellClass alloc] initWithFrame:CGRectMake(width * i, 0, width, height)];
         [self.scrollView addSubview:cell];
         [self.cells addObject:cell];
@@ -90,7 +90,8 @@
     // 移动到中间
     for (int i = 0; i < 3; i++) {
         YUSwiperCell *cell = self.cells[i];
-        CGRect cellFrame = cell.frame;
+        cell.layer.transform = CATransform3DIdentity;
+        CGRect cellFrame = self.scrollView.bounds;
         cellFrame.origin.x = (self.numberOfCount * 5000 + self.currentIndex + (i - 1)) * self.pageWidth;
         cell.frame = cellFrame;
         if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
@@ -98,6 +99,7 @@
         }
     }
     [self.scrollView setContentOffset:CGPointMake((self.numberOfCount * 5000 + self.currentIndex) * self.pageWidth, 0)];
+    [self scrollViewDidScroll:self.scrollView];
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex{
@@ -143,35 +145,45 @@
 // 下一个
 - (void)next:(UIButton *)btn{
     if (btn) {
-        [self cancelAutoplay];
         btn.enabled = NO;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             btn.enabled = YES;
             [self startAutoplay];
         });
+        [self cancelAutoplay];
     }
     CGFloat offsetX = self.scrollView.contentOffset.x + self.pageWidth;
-    if (offsetX > self.scrollView.contentSize.width) {
+    if (offsetX > self.scrollView.contentSize.width - self.pageWidth * self.numberOfCount * 100) {
         [self moveToCenter];
     }
-    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    NSInteger index = (NSInteger)(offsetX / self.pageWidth);
+    NSInteger remainder = (NSInteger)offsetX % (NSInteger)self.pageWidth;
+    if (remainder) {
+        index++;
+    }
+    [self.scrollView setContentOffset:CGPointMake(index * self.pageWidth, 0) animated:YES];
 }
 
 // 上一个
 - (void)previous:(UIButton *)btn{
     if (btn) {
-        [self cancelAutoplay];
         btn.enabled = NO;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             btn.enabled = YES;
             [self startAutoplay];
         });
+        [self cancelAutoplay];
     }
     CGFloat offsetX = self.scrollView.contentOffset.x - self.pageWidth;
-    if (offsetX < 0) {
+    if (offsetX < self.pageWidth * self.numberOfCount * 100) {
         [self moveToCenter];
     }
-    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    NSInteger index = (NSInteger)(offsetX / self.pageWidth);
+    NSInteger remainder = (NSInteger)offsetX % (NSInteger)self.pageWidth;
+    if (remainder) {
+        index--;
+    }
+    [self.scrollView setContentOffset:CGPointMake(index * self.pageWidth, 0) animated:YES];
 }
 
 - (void)clickItem:(UITapGestureRecognizer *)tap{
@@ -192,7 +204,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger currentIndex = (int)offsetX / (int)self.pageWidth % self.numberOfCount;
+    NSInteger currentIndex = (NSInteger)(offsetX / self.pageWidth) % self.numberOfCount;
     if (currentIndex != _currentIndex) {
         _currentIndex = currentIndex;
         if ([_delegate respondsToSelector:@selector(currentIndexChange:)]) {
@@ -249,6 +261,10 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat offsetX = scrollView.contentOffset.x;
+    if (offsetX < self.pageWidth * self.numberOfCount * 100 || offsetX > self.scrollView.contentSize.width - self.pageWidth * self.numberOfCount * 100) {
+        [self moveToCenter];
+    }
     [self startAutoplay];
     if ([_delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
         [_delegate scrollViewDidEndDecelerating:scrollView];
