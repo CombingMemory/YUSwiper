@@ -30,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIView *view = [[UIView alloc] init];
+    [self.view addSubview:view];
+    
     self.view.backgroundColor = [UIColor grayColor];
     
     self.swiper = [[YUSwiper alloc] init];
@@ -61,16 +64,16 @@
 }
 
 - (void)currentIndexChange:(NSInteger)currentIndex{
-    NSLog(@"%ld",currentIndex);
+    NSLog(@"%ld",(long)currentIndex);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    for (YUSwiper *cell in self.swiper.visibleCells) {
+    for (YUSwiperCell *cell in self.swiper.visibleCells) {
         CGFloat offsetX = cell.frame.origin.x - scrollView.contentOffset.x;
         CGFloat multiple = fabs(offsetX) / scrollView.frame.size.width;
         CGFloat sx = 1 - multiple * 0.05;
         CGFloat sy = 1 - multiple * 0.15;
-        cell.layer.transform = CATransform3DMakeScale(sx, sy, 1);
+        cell.imageView.layer.transform = CATransform3DMakeScale(sx, sy, 1);
     }
 }
 
