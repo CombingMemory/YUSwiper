@@ -7,18 +7,30 @@
 //
 
 #import "YUSwiper.h"
+#import <Masonry/Masonry.h>
+#import "NSTimer+YUSwiper.h"
+
+#define YUSWIPER_SECTION_COUNT 10000
 
 @interface YUSwiper ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
-@property (nonatomic, readonly) NSMutableArray<__kindof YUSwiperCell *> *cells;
+@property (nonatomic, strong) NSMutableArray<__kindof YUSwiperCell *> *cells;
 
-@property (nonatomic, readonly) CGFloat pageWidth;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
 @implementation YUSwiper
+
+- (instancetype)initWithCoder:(NSCoder *)coder{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self _init];
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     return [self initWithFrame:frame pageWidth:0];
@@ -27,32 +39,73 @@
 - (instancetype)initWithFrame:(CGRect)frame pageWidth:(CGFloat)pageWidth{
     self = [super initWithFrame:frame];
     if (self) {
-        _pageWidth = (int)(pageWidth <= 0?frame.size.width:pageWidth);
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake((frame.size.width - self.pageWidth) / 2, 0, self.pageWidth, frame.size.height)];
-        [self addSubview:self.scrollView];
-        self.scrollView.delegate = self;
-        self.scrollView.pagingEnabled = YES;
-        self.scrollView.clipsToBounds = NO;
-        self.scrollView.showsVerticalScrollIndicator = NO;
-        self.scrollView.showsHorizontalScrollIndicator = NO;
-        _numberOfCount = 0;
-        _currentIndex = 0;
-        _interval = 3;
-        _cells = [NSMutableArray array];
-        [self registerCellForClass:[YUSwiperCell class]];
-        if (self.pageWidth != frame.size.width) {
-            UIButton *previousBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            previousBtn.frame = CGRectMake(0, 0, (frame.size.width - self.pageWidth) / 2, frame.size.height);
-            [self addSubview:previousBtn];
-            [previousBtn addTarget:self action:@selector(previous:) forControlEvents:UIControlEventTouchUpInside];
-            
-            UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            nextBtn.frame = CGRectMake(frame.size.width - (frame.size.width - self.pageWidth) / 2, 0, (frame.size.width - self.pageWidth) / 2, frame.size.height);
-            [self addSubview:nextBtn];
-            [nextBtn addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
-        }
+        _spacing = (frame.size.width - pageWidth) / 2;
+        [self _init];
     }
     return self;
+}
+
+- (void)_init{
+    self.clipsToBounds = YES;
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    [self addSubview:self.scrollView];
+    [self resetScrollViewConstraints];
+    self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.clipsToBounds = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    _numberOfCount = 0;
+    _currentIndex = 0;
+    _interval = 3;
+    
+    
+    UIButton *previousBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [previousBtn addTarget:self action:@selector(previous:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:previousBtn];
+    [previousBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.mas_equalTo(0);
+        make.right.mas_equalTo(self.scrollView.mas_left);
+    }];
+
+    UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextBtn addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:nextBtn];
+    [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.mas_equalTo(0);
+        make.left.mas_equalTo(self.scrollView.mas_right);
+    }];
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [self reloadData];
+}
+
+- (void)reloadData{
+    if (self.scrollView.frame.size.width == 0) return;
+    if ([_delegate respondsToSelector:@selector(numberOfCountInSwiper:)]) {
+        _numberOfCount = [_delegate numberOfCountInSwiper:self];
+    }
+    if (0 != self.numberOfCount) {
+        // 并未注册过cell 注册默认cell
+        if (0 == self.cells.count) {
+            [self registerCellForClass:[YUSwiperCell class]];
+        }
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * _numberOfCount * YUSWIPER_SECTION_COUNT, self.scrollView.frame.size.height);
+        [self moveToCenter];
+        
+        [self checkAutoplay];
+    }
+}
+
+- (void)resetScrollViewConstraints{
+    [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.spacing);
+        make.right.mas_equalTo(-self.spacing);
+        make.top.bottom.mas_equalTo(0);
+    }];
 }
 
 - (void)registerCellForClass:(Class)cellClass{
@@ -70,35 +123,20 @@
     }
 }
 
-- (void)setDelegate:(id<YUSwiperDelegate>)delegate{
-    _delegate = delegate;
-    [self reloadData];
-}
-
-- (void)reloadData{
-    if ([_delegate respondsToSelector:@selector(numberOfCountInSwiper:)]) {
-        _numberOfCount = [_delegate numberOfCountInSwiper:self];
-    }
-    if (_numberOfCount) {
-        self.scrollView.contentSize = CGSizeMake(self.pageWidth * _numberOfCount * 10000, self.scrollView.frame.size.height);
-        [self moveToCenter];
-        [self startAutoplay];
-    }
-}
-
 - (void)moveToCenter{
     // 移动到中间
-    for (int i = 0; i < 3; i++) {
-        YUSwiperCell *cell = self.cells[i];
+    [self.cells enumerateObjectsUsingBlock:^(__kindof YUSwiperCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        // 重置transform
         cell.layer.transform = CATransform3DIdentity;
+        // 重置大小
         CGRect cellFrame = self.scrollView.bounds;
-        cellFrame.origin.x = (self.numberOfCount * 5000 + self.currentIndex + (i - 1)) * self.pageWidth;
+        cellFrame.origin.x = (self.numberOfCount * (YUSWIPER_SECTION_COUNT / 2) + self.currentIndex + (idx - 1)) * self.scrollView.frame.size.width;
         cell.frame = cellFrame;
         if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-            [_delegate swiper:self cell:cell index:(self.currentIndex + (i - 1) + self.numberOfCount) % self.numberOfCount];
+            [_delegate swiper:self cell:cell index:(self.currentIndex + (idx - 1) + self.numberOfCount) % self.numberOfCount];
         }
-    }
-    [self.scrollView setContentOffset:CGPointMake((self.numberOfCount * 5000 + self.currentIndex) * self.pageWidth, 0)];
+    }];
+    [self.scrollView setContentOffset:CGPointMake((self.numberOfCount * (YUSWIPER_SECTION_COUNT / 2) + self.currentIndex) * self.scrollView.frame.size.width, 0) animated:NO];
     [self scrollViewDidScroll:self.scrollView];
 }
 
@@ -108,38 +146,77 @@
 
 - (void)setCurrentIndex:(NSInteger)index animated:(BOOL)animated {
     if (!_numberOfCount) return;
-    if (index < 0) return;
+    index = [self checkIndexOutOfBounds:index];
     if (_currentIndex == index) return;
     [self moveToCenter];
     NSInteger currentIndex = (index + self.numberOfCount) % self.numberOfCount;
-    CGFloat moveOffsetX = (currentIndex - _currentIndex) * self.pageWidth;
+    CGFloat moveOffsetX = (currentIndex - _currentIndex) * self.scrollView.frame.size.width;
     _currentIndex = currentIndex;
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x + moveOffsetX, 0) animated:animated];
 }
 
+- (NSInteger)checkIndexOutOfBounds:(NSInteger)index{
+    // 防止越界
+    if (index < 0 || 0 == self.numberOfCount) {
+        return 0;
+    }
+    if (index > self.numberOfCount - 1) {
+        return self.numberOfCount - 1;
+    }
+    return index;
+}
+
+
 - (NSArray<__kindof YUSwiperCell *> *)visibleCells{
-    return [NSArray arrayWithArray:_cells];
+    return [NSArray arrayWithArray:self.cells];
 }
 
-- (void)setAutoplay:(BOOL)autoplay{
+- (void)setSpacing:(float)spacing{
+    spacing = spacing < 0?0:spacing;
+    if (_spacing == spacing) return;
+    _spacing = spacing;
+    // 清除timer
+    [self cleanTimer];
+    [self resetScrollViewConstraints];
+    [self reloadData];
+}
+
+- (void)setInterval:(NSInteger)interval{
+    if (_interval == interval) return;
+    _interval = interval;
+    // 清除timer
+    [self cleanTimer];
+    [self checkAutoplay];
+}
+
+- (void)setAutoplay:(BOOL)autoplay {
+    if (_autoplay == autoplay) return;
     _autoplay = autoplay;
-    [self startAutoplay];
+    [self checkAutoplay];
 }
 
-- (void)startAutoplay{
-    [self cancelAutoplay];
+/// 检查是否可以开始自动轮博
+- (void)checkAutoplay{
     if (self.numberOfCount && self.isAutoplay) {
-        [self performSelector:@selector(autoplay) withObject:nil afterDelay:self.interval];
+        [self startTimer];
+    }else{
+        [self stopTimer];
     }
 }
 
+/// 自动轮播
 - (void)autoplay{
     [self next:nil];
-    [self performSelector:@selector(autoplay) withObject:nil afterDelay:self.interval];
 }
 
-- (void)cancelAutoplay{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoplay) object:nil];
+- (void)startTimer{
+    NSTimeInterval time_interval = [[NSDate date] timeIntervalSince1970] + self.interval;
+    [self.timer setFireDate:[NSDate dateWithTimeIntervalSince1970:time_interval]];
+}
+
+/// 暂停timer
+- (void)stopTimer{
+    [_timer setFireDate:[NSDate distantFuture]];
 }
 
 // 下一个
@@ -148,20 +225,12 @@
         btn.enabled = NO;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             btn.enabled = YES;
-            [self startAutoplay];
+            [self checkAutoplay];
         });
-        [self cancelAutoplay];
+        [self stopTimer];
     }
-    CGFloat offsetX = self.scrollView.contentOffset.x + self.pageWidth;
-    if (offsetX > self.scrollView.contentSize.width - self.pageWidth * self.numberOfCount * 100) {
-        [self moveToCenter];
-    }
-    NSInteger index = (NSInteger)(offsetX / self.pageWidth);
-    NSInteger remainder = (NSInteger)offsetX % (NSInteger)self.pageWidth;
-    if (remainder) {
-        index++;
-    }
-    [self.scrollView setContentOffset:CGPointMake(index * self.pageWidth, 0) animated:YES];
+    CGFloat offsetX = self.scrollView.contentOffset.x + self.scrollView.frame.size.width;
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
 // 上一个
@@ -170,20 +239,12 @@
         btn.enabled = NO;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             btn.enabled = YES;
-            [self startAutoplay];
+            [self checkAutoplay];
         });
-        [self cancelAutoplay];
+        [self stopTimer];
     }
-    CGFloat offsetX = self.scrollView.contentOffset.x - self.pageWidth;
-    if (offsetX < self.pageWidth * self.numberOfCount * 100) {
-        [self moveToCenter];
-    }
-    NSInteger index = (NSInteger)(offsetX / self.pageWidth);
-    NSInteger remainder = (NSInteger)offsetX % (NSInteger)self.pageWidth;
-    if (remainder) {
-        index--;
-    }
-    [self.scrollView setContentOffset:CGPointMake(index * self.pageWidth, 0) animated:YES];
+    CGFloat offsetX = self.scrollView.contentOffset.x - self.scrollView.frame.size.width;
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
 - (void)clickItem:(UITapGestureRecognizer *)tap{
@@ -192,19 +253,36 @@
     }
 }
 
-#pragma mark scrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (self.isAutoplay) {
-        [self cancelAutoplay];
+#pragma mark lazy
+- (NSMutableArray<__kindof YUSwiperCell *> *)cells{
+    if (!_cells) {
+        _cells = [NSMutableArray array];
     }
-    if ([_delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
-        [_delegate scrollViewWillBeginDragging:scrollView];
-    }
+    return _cells;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger currentIndex = (NSInteger)(offsetX / self.pageWidth) % self.numberOfCount;
+- (NSTimer *)timer{
+    if (!_timer) {
+        __weak __typeof(self)weakSelf = self;
+        _timer = [NSTimer yuSwiper_timerWithTimeInterval:self.interval repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [weakSelf autoplay];
+        }];
+        NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+        [runloop addTimer:_timer forMode:NSRunLoopCommonModes];
+        [_timer setFireDate:[NSDate distantFuture]];
+    }
+    return _timer;
+}
+
+- (void)cleanTimer{
+    [_timer invalidate];
+    _timer = nil;
+}
+
+- (void)cellReuseWithOffsetX:(float)offsetX{
+    offsetX += self.scrollView.frame.size.width / 2;
+    NSInteger currentIndex = (NSInteger)(offsetX / self.scrollView.frame.size.width) % self.numberOfCount;
+    currentIndex = (int)[self checkIndexOutOfBounds:currentIndex];
     if (currentIndex != _currentIndex) {
         _currentIndex = currentIndex;
         if ([_delegate respondsToSelector:@selector(currentIndexChange:)]) {
@@ -215,28 +293,41 @@
         CGFloat cellX = cell.frame.origin.x;
         CGFloat difference = offsetX - cellX;
         CGRect cellFrame = cell.frame;
-        CGFloat x = self.pageWidth * 3;
-        if (difference > self.pageWidth * 1.5) {
-            if (cellFrame.origin.x + x < scrollView.contentSize.width) {
+        CGFloat x = self.scrollView.frame.size.width * 3;
+        if (difference > self.scrollView.frame.size.width * 1.7) {
+            if (cellFrame.origin.x + x < self.scrollView.contentSize.width) {
                 cellFrame.origin.x += x;
                 cell.frame = cellFrame;
                 if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.pageWidth % self.numberOfCount;
+                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
                     [_delegate swiper:self cell:cell index:index];
                 }
             }
         }
-        if (difference < -self.pageWidth*1.5) {
+        if (difference < -self.scrollView.frame.size.width * 1.3) {
             if (cellFrame.origin.x - x >= 0) {
                 cellFrame.origin.x -= x;
                 cell.frame = cellFrame;
                 if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.pageWidth % self.numberOfCount;
+                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
                     [_delegate swiper:self cell:cell index:index];
                 }
             }
         }
     }
+}
+
+#pragma mark scrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    // 手指刚开始的时候停止timer
+    [self stopTimer];
+    if ([_delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+        [_delegate scrollViewWillBeginDragging:scrollView];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self cellReuseWithOffsetX:scrollView.contentOffset.x];
     if ([_delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [_delegate scrollViewDidScroll:scrollView];
     }
@@ -262,14 +353,34 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.contentOffset.x;
-    if (offsetX < self.pageWidth * self.numberOfCount * 100 || offsetX > self.scrollView.contentSize.width - self.pageWidth * self.numberOfCount * 100) {
+    if (offsetX < self.scrollView.frame.size.width * self.numberOfCount * 100 || offsetX > self.scrollView.contentSize.width - self.scrollView.frame.size.width * self.numberOfCount * 100) {
         [self moveToCenter];
     }
-    [self startAutoplay];
+    
+    [self checkAutoplay];
+    
     if ([_delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
         [_delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
+#pragma mark willMoveToWindow
+- (void)willMoveToWindow:(UIWindow *)newWindow{
+    [super willMoveToWindow:newWindow];
+    if (newWindow) {
+        if (0 != self.numberOfCount) {
+            [self moveToCenter];
+            [self checkAutoplay];
+        }
+    }else{
+        [self stopTimer];
+    }
+}
+
+
+#pragma mark dealloc
+- (void)dealloc{
+    [self cleanTimer];
+}
 
 @end

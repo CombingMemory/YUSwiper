@@ -18,12 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param frame 控件大小
 /// @param pageWidth 整页滑动的宽度
 - (instancetype)initWithFrame:(CGRect)frame pageWidth:(CGFloat)pageWidth;
+/// 左右两边的间距
+@property (nonatomic, assign) float spacing;
 /// 可见的Cell
 @property (nonatomic, readonly) NSArray<__kindof YUSwiperCell *> *visibleCells;
 /// 总数
 @property (nonatomic, readonly) NSInteger numberOfCount;
-/// 当前的指引
-@property (nonatomic) NSInteger currentIndex;
 /// 自动轮播 默认：NO
 @property (nonatomic, getter=isAutoplay) BOOL autoplay;
 /// 自动轮播时间 默认3s
@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param index 指引
 /// @param animated 是否开启动画
 - (void)setCurrentIndex:(NSInteger)index animated:(BOOL)animated;
+/// 当前的指引
+@property (nonatomic) NSInteger currentIndex;
 /// 注册Cell
 /// @param cellClass 需要注册cell的类名称
 - (void)registerCellForClass:(nullable Class)cellClass;
@@ -41,6 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reloadData;
 
 @end
+
+
+
+
+
+//-----------------------------------------------------------
+
+
+
+
+
 
 @protocol YUSwiperDelegate <UIScrollViewDelegate>
 

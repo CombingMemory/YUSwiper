@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "YUSwiper"
-  spec.version      = "1.0.2"
+  spec.version      = "1.1.0"
   spec.summary      = "一个可以设置整页滑动宽度的轮播图"
 
   # This description is used to generate tags and improve search results.

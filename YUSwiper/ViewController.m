@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "YUSwiper.h"
+#import <Masonry/Masonry.h>
 
 @interface ViewController ()<YUSwiperDelegate>
 
@@ -31,20 +32,24 @@
     
     self.view.backgroundColor = [UIColor grayColor];
     
-    self.swiper = [[YUSwiper alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 150) pageWidth:self.view.frame.size.width - 32];
-    [self.view addSubview:self.swiper];
-    
+    self.swiper = [[YUSwiper alloc] init];
+    self.swiper.spacing = 16;
     self.swiper.delegate = self;
-        self.swiper.autoplay = YES;
+    self.swiper.autoplay = YES;
+    [self.view addSubview:self.swiper];
+    [self.swiper mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(150);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(200);
+    }];
     
     
-    //    self.swiper.backgroundColor = [UIColor yellowColor];
     [self.array addObject:[UIImage imageNamed:@"01.jpg"]];
     [self.array addObject:[UIImage imageNamed:@"02.jpg"]];
     [self.array addObject:[UIImage imageNamed:@"03.jpg"]];
     [self.array addObject:[UIImage imageNamed:@"04.jpg"]];
     [self.array addObject:[UIImage imageNamed:@"05.jpg"]];
-    [self.swiper reloadData];
+//    [self.swiper reloadData];
 }
 
 - (NSInteger)numberOfCountInSwiper:(YUSwiper *)swiper{
@@ -56,7 +61,7 @@
 }
 
 - (void)currentIndexChange:(NSInteger)currentIndex{
-    
+    NSLog(@"%ld",currentIndex);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -68,5 +73,6 @@
         cell.layer.transform = CATransform3DMakeScale(sx, sy, 1);
     }
 }
+
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1B56A22620290F00DF2D03 /* NSTimer+YUSwiper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1B56A12620290F00DF2D03 /* NSTimer+YUSwiper.m */; };
 		CD1D5718248233F500CFA76F /* 05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5713248233F500CFA76F /* 05.jpg */; };
 		CD1D5719248233F500CFA76F /* 03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5714248233F500CFA76F /* 03.jpg */; };
 		CD1D571A248233F500CFA76F /* 02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5715248233F500CFA76F /* 02.jpg */; };
@@ -16,11 +17,18 @@
 		CD1D572524826BC500CFA76F /* YUSwiper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D572224826BC500CFA76F /* YUSwiper.m */; };
 		CD1D572624826BC500CFA76F /* YUSwiperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D572424826BC500CFA76F /* YUSwiperCell.m */; };
 		CD7DE35E24764798007CDDA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DE35D24764798007CDDA9 /* ViewController.m */; };
-		CD7DE3632476479C007CDDA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7DE3622476479C007CDDA9 /* Assets.xcassets */; };
 		CD7DE3692476479C007CDDA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DE3682476479C007CDDA9 /* main.m */; };
+		CDC9DBB1261FFC3100B9AC57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDC9DBB0261FFC3100B9AC57 /* Assets.xcassets */; };
+		CDC9DBB4261FFC4B00B9AC57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC9DBB3261FFC4B00B9AC57 /* LaunchScreen.storyboard */; };
+		CDC9DBB8261FFC7300B9AC57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC9DBB7261FFC7300B9AC57 /* Main.storyboard */; };
+		E321B2C8624F5EA0FE8598EE /* libPods-YUSwiper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF998A9C7A858DB05148FDE3 /* libPods-YUSwiper.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11EE4F08013FE1196C12E758 /* Pods-YUSwiper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YUSwiper.release.xcconfig"; path = "Target Support Files/Pods-YUSwiper/Pods-YUSwiper.release.xcconfig"; sourceTree = "<group>"; };
+		29B445B1F07A59B83A06FAE3 /* Pods-YUSwiper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YUSwiper.debug.xcconfig"; path = "Target Support Files/Pods-YUSwiper/Pods-YUSwiper.debug.xcconfig"; sourceTree = "<group>"; };
+		CD1B56A02620290F00DF2D03 /* NSTimer+YUSwiper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YUSwiper.h"; sourceTree = "<group>"; };
+		CD1B56A12620290F00DF2D03 /* NSTimer+YUSwiper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YUSwiper.m"; sourceTree = "<group>"; };
 		CD1D5713248233F500CFA76F /* 05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 05.jpg; sourceTree = "<group>"; };
 		CD1D5714248233F500CFA76F /* 03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 03.jpg; sourceTree = "<group>"; };
 		CD1D5715248233F500CFA76F /* 02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 02.jpg; sourceTree = "<group>"; };
@@ -35,9 +43,12 @@
 		CD7DE35324764798007CDDA9 /* YUSwiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YUSwiper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7DE35C24764798007CDDA9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		CD7DE35D24764798007CDDA9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CD7DE3622476479C007CDDA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD7DE3672476479C007CDDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD7DE3682476479C007CDDA9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CDC9DBB0261FFC3100B9AC57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDC9DBB3261FFC4B00B9AC57 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CDC9DBB7261FFC7300B9AC57 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CF998A9C7A858DB05148FDE3 /* libPods-YUSwiper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YUSwiper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +56,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E321B2C8624F5EA0FE8598EE /* libPods-YUSwiper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C903592D6EBB240B9ABB6AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF998A9C7A858DB05148FDE3 /* libPods-YUSwiper.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5FB5C8ED945030DD60939A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				29B445B1F07A59B83A06FAE3 /* Pods-YUSwiper.debug.xcconfig */,
+				11EE4F08013FE1196C12E758 /* Pods-YUSwiper.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CD1D572024826BC500CFA76F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +87,8 @@
 				CD1D572224826BC500CFA76F /* YUSwiper.m */,
 				CD1D572124826BC500CFA76F /* YUSwiperCell.h */,
 				CD1D572424826BC500CFA76F /* YUSwiperCell.m */,
+				CD1B56A02620290F00DF2D03 /* NSTimer+YUSwiper.h */,
+				CD1B56A12620290F00DF2D03 /* NSTimer+YUSwiper.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -67,6 +98,8 @@
 			children = (
 				CD7DE35524764798007CDDA9 /* YUSwiper */,
 				CD7DE35424764798007CDDA9 /* Products */,
+				A5FB5C8ED945030DD60939A6 /* Pods */,
+				1C903592D6EBB240B9ABB6AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,7 +124,9 @@
 				CD1D5714248233F500CFA76F /* 03.jpg */,
 				CD1D5717248233F500CFA76F /* 04.jpg */,
 				CD1D5713248233F500CFA76F /* 05.jpg */,
-				CD7DE3622476479C007CDDA9 /* Assets.xcassets */,
+				CDC9DBB7261FFC7300B9AC57 /* Main.storyboard */,
+				CDC9DBB0261FFC3100B9AC57 /* Assets.xcassets */,
+				CDC9DBB3261FFC4B00B9AC57 /* LaunchScreen.storyboard */,
 				CD7DE3672476479C007CDDA9 /* Info.plist */,
 				CD7DE3682476479C007CDDA9 /* main.m */,
 			);
@@ -105,6 +140,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD7DE36C2476479C007CDDA9 /* Build configuration list for PBXNativeTarget "YUSwiper" */;
 			buildPhases = (
+				84E18FA2E6DCF92B786C1AFF /* [CP] Check Pods Manifest.lock */,
 				CD7DE34F24764798007CDDA9 /* Sources */,
 				CD7DE35024764798007CDDA9 /* Frameworks */,
 				CD7DE35124764798007CDDA9 /* Resources */,
@@ -124,7 +160,7 @@
 		CD7DE34B24764798007CDDA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "捋忆";
 				TargetAttributes = {
 					CD7DE35224764798007CDDA9 = {
@@ -158,13 +194,40 @@
 				CD1D5719248233F500CFA76F /* 03.jpg in Resources */,
 				CD1D571C248233F500CFA76F /* 04.jpg in Resources */,
 				CD1D571A248233F500CFA76F /* 02.jpg in Resources */,
-				CD7DE3632476479C007CDDA9 /* Assets.xcassets in Resources */,
+				CDC9DBB8261FFC7300B9AC57 /* Main.storyboard in Resources */,
 				CD1D5718248233F500CFA76F /* 05.jpg in Resources */,
+				CDC9DBB1261FFC3100B9AC57 /* Assets.xcassets in Resources */,
 				CD1D571B248233F500CFA76F /* 01.jpg in Resources */,
+				CDC9DBB4261FFC4B00B9AC57 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84E18FA2E6DCF92B786C1AFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YUSwiper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD7DE34F24764798007CDDA9 /* Sources */ = {
@@ -173,6 +236,7 @@
 			files = (
 				CD7DE35E24764798007CDDA9 /* ViewController.m in Sources */,
 				CD1D572524826BC500CFA76F /* YUSwiper.m in Sources */,
+				CD1B56A22620290F00DF2D03 /* NSTimer+YUSwiper.m in Sources */,
 				CD7DE3692476479C007CDDA9 /* main.m in Sources */,
 				CD1D571F248251E400CFA76F /* AppDelegate.m in Sources */,
 				CD1D572624826BC500CFA76F /* YUSwiperCell.m in Sources */,
@@ -232,7 +296,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -284,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -294,12 +358,13 @@
 		};
 		CD7DE36D2476479C007CDDA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29B445B1F07A59B83A06FAE3 /* Pods-YUSwiper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3J46398ND;
 				INFOPLIST_FILE = YUSwiper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,12 +377,13 @@
 		};
 		CD7DE36E2476479C007CDDA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11EE4F08013FE1196C12E758 /* Pods-YUSwiper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3J46398ND;
 				INFOPLIST_FILE = YUSwiper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
