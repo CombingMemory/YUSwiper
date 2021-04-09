@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   spec.description  = <<-DESC
-  一个可以设置整页滑动宽度的轮播图
+  				YUSwiper 一个可以设置整页滑动宽度的轮播图
                    DESC
 
   spec.homepage     = "https://github.com/CombingMemory/YUSwiper"
@@ -38,6 +38,6 @@ Pod::Spec.new do |spec|
 
   spec.platform = :ios, "6.0"
   spec.requires_arc = true
-
+  spec.dependency "Masonry"
 
 end
