@@ -123,21 +123,103 @@
     }
 }
 
+- (void)cellReuseWithOffsetX:(float)offsetX{
+    offsetX += self.scrollView.frame.size.width / 2;
+    NSInteger currentIndex = (NSInteger)(offsetX / self.scrollView.frame.size.width) % self.numberOfCount;
+    currentIndex = (int)[self checkIndexOutOfBounds:currentIndex];
+    if (currentIndex != _currentIndex) {
+        // 将要消失不显示的cell
+        YUSwiperCell *pre_cell = [self getCellAtIndex:_currentIndex];
+        if ([_delegate respondsToSelector:@selector(swiper:willDisappearCell:atIndex:)]) {
+            [_delegate swiper:self willDisappearCell:pre_cell atIndex:_currentIndex];
+        }
+        // 最新的index
+        _currentIndex = currentIndex;
+        if ([_delegate respondsToSelector:@selector(currentIndexChange:)]) {
+            [_delegate currentIndexChange:_currentIndex];
+        }
+        // 当前显示的cell
+        YUSwiperCell *current_cell = [self getCellAtIndex:_currentIndex];
+        if ([_delegate respondsToSelector:@selector(swiper:currentDisplayCell:atIndex:)]) {
+            [_delegate swiper:self currentDisplayCell:current_cell atIndex:_currentIndex];
+        }
+        
+    }
+    
+    
+    for (YUSwiperCell *cell in self.cells) {
+        CGFloat cellX = cell.frame.origin.x;
+        CGFloat difference = offsetX - cellX;
+        CGRect cellFrame = cell.frame;
+        CGFloat x = self.scrollView.frame.size.width * 3;
+        if (difference > self.scrollView.frame.size.width * 1.7) {
+            if (cellFrame.origin.x + x < self.scrollView.contentSize.width) {
+                cellFrame.origin.x += x;
+                cell.frame = cellFrame;
+                NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
+                [self swiperForCell:cell atIndex:index];
+            }
+        }
+        if (difference < -self.scrollView.frame.size.width * 1.3) {
+            if (cellFrame.origin.x - x >= 0) {
+                cellFrame.origin.x -= x;
+                cell.frame = cellFrame;
+                NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
+                [self swiperForCell:cell atIndex:index];
+            }
+        }
+    }
+    
+    // 检查是否已经快移动到边缘了。移动到中心
+    if (offsetX < self.scrollView.frame.size.width * self.numberOfCount * 100 || offsetX > self.scrollView.contentSize.width - self.scrollView.frame.size.width * self.numberOfCount * 100) {
+        [self moveToCenter];
+    }
+}
+
 - (void)moveToCenter{
     // 移动到中间
     [self.cells enumerateObjectsUsingBlock:^(__kindof YUSwiperCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
-        // 重置transform
-        cell.layer.transform = CATransform3DIdentity;
         // 重置大小
         CGRect cellFrame = self.scrollView.bounds;
         cellFrame.origin.x = (self.numberOfCount * (YUSWIPER_SECTION_COUNT / 2) + self.currentIndex + (idx - 1)) * self.scrollView.frame.size.width;
         cell.frame = cellFrame;
-        if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-            [_delegate swiper:self cell:cell index:(self.currentIndex + (idx - 1) + self.numberOfCount) % self.numberOfCount];
+        
+        NSInteger index = (self.currentIndex + (idx - 1) + self.numberOfCount) % self.numberOfCount;
+        
+        [self swiperForCell:cell atIndex:index];
+        
+        if (index == self.currentIndex) {
+            if ([_delegate respondsToSelector:@selector(swiper:currentDisplayCell:atIndex:)]) {
+                [_delegate swiper:self currentDisplayCell:cell atIndex:index];
+            }
+        }else{
+            if ([_delegate respondsToSelector:@selector(swiper:willDisappearCell:atIndex:)]) {
+                [_delegate swiper:self willDisappearCell:cell atIndex:index];
+            }
         }
+        
     }];
-    [self.scrollView setContentOffset:CGPointMake((self.numberOfCount * (YUSWIPER_SECTION_COUNT / 2) + self.currentIndex) * self.scrollView.frame.size.width, 0) animated:NO];
+    CGFloat offsetX = (self.numberOfCount * (YUSWIPER_SECTION_COUNT / 2) + self.currentIndex) * self.scrollView.frame.size.width;
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:NO];
     [self scrollViewDidScroll:self.scrollView];
+}
+
+- (void)swiperForCell:(YUSwiperCell *)cell atIndex:(NSInteger)index{
+    cell.index = index;
+    if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
+        [_delegate swiper:self cell:cell index:index];
+    }
+}
+
+- (YUSwiperCell *)getCellAtIndex:(NSInteger)index{
+    YUSwiperCell *cell = nil;
+    for (YUSwiperCell *obj in self.cells) {
+        if (index == obj.index) {
+            cell = obj;
+            break;;
+        }
+    }
+    return cell;
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex{
@@ -279,44 +361,6 @@
     _timer = nil;
 }
 
-- (void)cellReuseWithOffsetX:(float)offsetX{
-    offsetX += self.scrollView.frame.size.width / 2;
-    NSInteger currentIndex = (NSInteger)(offsetX / self.scrollView.frame.size.width) % self.numberOfCount;
-    currentIndex = (int)[self checkIndexOutOfBounds:currentIndex];
-    if (currentIndex != _currentIndex) {
-        _currentIndex = currentIndex;
-        if ([_delegate respondsToSelector:@selector(currentIndexChange:)]) {
-            [_delegate currentIndexChange:_currentIndex];
-        }
-    }
-    for (YUSwiperCell *cell in self.cells) {
-        CGFloat cellX = cell.frame.origin.x;
-        CGFloat difference = offsetX - cellX;
-        CGRect cellFrame = cell.frame;
-        CGFloat x = self.scrollView.frame.size.width * 3;
-        if (difference > self.scrollView.frame.size.width * 1.7) {
-            if (cellFrame.origin.x + x < self.scrollView.contentSize.width) {
-                cellFrame.origin.x += x;
-                cell.frame = cellFrame;
-                if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
-                    [_delegate swiper:self cell:cell index:index];
-                }
-            }
-        }
-        if (difference < -self.scrollView.frame.size.width * 1.3) {
-            if (cellFrame.origin.x - x >= 0) {
-                cellFrame.origin.x -= x;
-                cell.frame = cellFrame;
-                if ([_delegate respondsToSelector:@selector(swiper:cell:index:)]) {
-                    NSInteger index = (NSInteger)cellFrame.origin.x / (NSInteger)self.scrollView.frame.size.width % self.numberOfCount;
-                    [_delegate swiper:self cell:cell index:index];
-                }
-            }
-        }
-    }
-}
-
 #pragma mark scrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     // 手指刚开始的时候停止timer
@@ -352,11 +396,6 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat offsetX = scrollView.contentOffset.x;
-    if (offsetX < self.scrollView.frame.size.width * self.numberOfCount * 100 || offsetX > self.scrollView.contentSize.width - self.scrollView.frame.size.width * self.numberOfCount * 100) {
-        [self moveToCenter];
-    }
-    
     [self checkAutoplay];
     
     if ([_delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {

@@ -10,7 +10,7 @@
 @implementation NSTimer (YUSwiper)
 
 + (NSTimer *)yuSwiper_timerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeats block:(void (^)(NSTimer * _Nonnull))block{
-    NSTimer *timer = [self timerWithTimeInterval:interval target:self selector:@selector(yuSwiperTimerAction:) userInfo:block repeats:repeats];
+    NSTimer *timer = [self timerWithTimeInterval:interval target:self selector:@selector(yuSwiperTimerAction:) userInfo:[block copy] repeats:repeats];
     return timer;
 }
 

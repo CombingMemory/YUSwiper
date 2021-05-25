@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YUSwiperCell : UIView
 
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong, readonly) UIView *contentView;
+
+@property (nonatomic, strong, readonly) UIImageView *imageView;
+
+@property (nonatomic, assign) NSInteger index;
 
 @end
 

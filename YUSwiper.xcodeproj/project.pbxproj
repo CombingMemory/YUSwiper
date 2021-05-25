@@ -160,7 +160,7 @@
 		CD7DE34B24764798007CDDA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "捋忆";
 				TargetAttributes = {
 					CD7DE35224764798007CDDA9 = {

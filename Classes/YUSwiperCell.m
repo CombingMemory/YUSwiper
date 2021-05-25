@@ -10,12 +10,16 @@
 #import <Masonry/Masonry.h>
 
 @implementation YUSwiperCell
+{
+    UIImageView *_imageView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:self.imageView];
-        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        _contentView = [[UIView alloc] init];
+        [self addSubview:self.contentView];
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
     }
@@ -27,7 +31,12 @@
         _imageView = [[UIImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.layer.cornerRadius = 8;
-        _imageView.clipsToBounds = YES;
+        _imageView.layer.masksToBounds = YES;
+        
+        [_contentView addSubview:_imageView];
+        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(0);
+        }];
     }
     return _imageView;
 }

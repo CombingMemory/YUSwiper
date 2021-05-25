@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerCellForClass:(nullable Class)cellClass;
 /// 重新加载数据
 - (void)reloadData;
+/// 根据index获得cell
+- (YUSwiperCell *)getCellAtIndex:(NSInteger)index;
 
 @end
 
@@ -66,7 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)currentIndexChange:(NSInteger)currentIndex;
-
+/// 当前正在显示的cell
+- (void)swiper:(YUSwiper *)swiper currentDisplayCell:(YUSwiperCell *)cell atIndex:(NSInteger)index;
+/// 将要消失不再显示的cell  也就是上一个currentCell (已经不在是当前page，但是还未彻底消失)
+- (void)swiper:(YUSwiper *)swiper willDisappearCell:(YUSwiperCell *)cell atIndex:(NSInteger)index;
+/// 点击的cell
 - (void)swiper:(YUSwiper *)swiper didSelectItemAtIndex:(NSInteger)index;
 
 @end

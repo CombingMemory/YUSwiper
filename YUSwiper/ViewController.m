@@ -38,7 +38,7 @@
     self.swiper = [[YUSwiper alloc] init];
     self.swiper.spacing = 16;
     self.swiper.delegate = self;
-    self.swiper.autoplay = YES;
+//    self.swiper.autoplay = YES;
     [self.view addSubview:self.swiper];
     [self.swiper mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(150);
@@ -63,9 +63,14 @@
     cell.imageView.image = self.array[index];
 }
 
-- (void)currentIndexChange:(NSInteger)currentIndex{
-    NSLog(@"%ld",(long)currentIndex);
+- (void)swiper:(YUSwiper *)swiper currentDisplayCell:(YUSwiperCell *)cell atIndex:(NSInteger)index{
+    
 }
+
+- (void)swiper:(YUSwiper *)swiper willDisappearCell:(YUSwiperCell *)cell atIndex:(NSInteger)index{
+    
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     for (YUSwiperCell *cell in self.swiper.visibleCells) {
@@ -73,9 +78,13 @@
         CGFloat multiple = fabs(offsetX) / scrollView.frame.size.width;
         CGFloat sx = 1 - multiple * 0.05;
         CGFloat sy = 1 - multiple * 0.15;
-        cell.imageView.layer.transform = CATransform3DMakeScale(sx, sy, 1);
+        cell.contentView.layer.transform = CATransform3DMakeScale(sx, sy, 1);
     }
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [self.swiper reloadData];
+}
 
 @end
